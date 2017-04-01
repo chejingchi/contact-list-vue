@@ -1,9 +1,9 @@
 <template>
-    <div class="single-contact" @click="contact.isActive = !contact.isActive">
+    <div class="single-contact" @click="contact.active = !contact.active">
         <i class="iconfont icon-lianxirenat"></i>
         <span> {{contact.contactName}}</span>
         <transition name="fade">
-            <a :href="'tel:' +contact.phoneNum" v-if="contact.isActive"> {{contact.phoneNum}} </a>
+            <a :href="'tel:' +contact.phoneNum" v-if="contact.active"> {{contact.phoneNum}} </a>
         </transition>
     </div>
 </template>

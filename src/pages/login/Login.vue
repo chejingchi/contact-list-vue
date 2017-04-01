@@ -24,7 +24,7 @@
 </template>
 <script>
   import axios from 'axios'
-  import {HTTP_ROOT, JSON_HEADER} from '@/config'
+  import {HTTP_ROOT, JSON_HEADER_OBJ} from '@/config'
 
   export default {
     name: 'login',
@@ -43,17 +43,15 @@
         axios.post(HTTP_ROOT + '/contactList/login', {
           username: this.username,
           password: this.password
-        }, {headers: JSON_HEADER})
-            .then((rsp) => {
-              let user = rsp.data.user
-              console.log(user)
-              if (user && (user.username = this.username)) {
-                this.$router.push('/contact-list/' + user.id)
-              }
-            })
-            .catch(function (response) {
-              console.log(response)
-            })
+        }, JSON_HEADER_OBJ).then((rsp) => {
+          let user = rsp.data.user
+          console.log(user)
+          if (user && (user.username = this.username)) {
+            this.$router.push('/contact-list/' + user.id)
+          }
+        }).catch(function (response) {
+          console.log(response)
+        })
       }
     }
   }
