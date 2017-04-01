@@ -1,48 +1,40 @@
 <template>
-  <div class="contact-list">
-    <div class="header">
-      <i class="iconfont icon-icon"></i>
-      <span>:{{user.username}}</span>
-      <i class="iconfont icon-tianjia" @click="addLinkMan"></i>
+    <div class="contact-list">
+        <div class="header">
+            <i class="iconfont icon-icon"></i>
+            <span>:{{user.username}}</span>
+            <i class="iconfont icon-tianjia" @click="addLinkMan"></i>
+        </div>
+        <div>
+            <div class="list-area" v-for="contact in contactList">
+                <SingleContact :contact="contact"></SingleContact>
+            </div>
+        </div>
     </div>
-    <div>
-      <div class="list-area" v-for="contact in contactList">
-        <SingleContact :contact="contact"></SingleContact>
-      </div>
-    </div>
-  </div>
 </template>
 <style scoped lang="less">
-  .contact-list {
-    .header {
-      margin-top: 5%;
-      i {
-        font-size: 45px;
-      }
-      .icon-tianjia {
-        margin-right: 6%;
-        float: right;
-      }
-      span {
-        font-size: 45px;
-      }
+    .contact-list {
+        margin-left: 4%;
+        margin-top: 8%;
+        .header {
+            margin-top: 5%;
+            font-size: 200%;
+            .icon-icon {
+                font-size: 20px;
+            }
+            .icon-tianjia {
+                margin-right: 6%;
+                float: right;
+            }
+        }
+        div {
+            .list-area {
+                padding-top: 5%;
+                padding-bottom: 5%;
+                margin-left: 10%;
+            }
+        }
     }
-    div {
-      .list-area {
-        padding-top: 5%;
-        padding-bottom: 5%;
-        height: 70px;
-        line-height: 68px;
-        font-size: 50px;
-        margin-left: 10%;
-      }
-      span {
-      }
-      a {
-
-      }
-    }
-  }
 
 </style>
 <script>
@@ -63,13 +55,13 @@
       axios.post(HTTP_ROOT + '/contactList/init', {
         id: this.user.id
       }, JSON_HEADER_OBJ)
-        .then((rsp) => {
-          this.contactList = rsp.data.contactList
-          this.user = rsp.data.user
-        })
-        .catch(function (response) {
-          console.log(response)
-        })
+          .then((rsp) => {
+            this.contactList = rsp.data.contactList
+            this.user = rsp.data.user
+          })
+          .catch(function (response) {
+            console.log(response)
+          })
     },
     methods: {
       addLinkMan () {

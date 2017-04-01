@@ -16,6 +16,8 @@
 </script>
 
 <style scoped lang="less">
+  @import "../../assets/css/style.css";
+
   .homePage {
     .welcome-msg {
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -23,8 +25,8 @@
       -moz-osx-font-smoothing: grayscale;
       text-align: center;
       color: #2c3e50;
-      margin-top: 60px;
-      font-size: 300%;
+      margin-top: 20%;
+      font-size: 200%;
     }
   }
 
