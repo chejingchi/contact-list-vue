@@ -27,3 +27,10 @@ npm run e2e
 # run all tests
 npm test
 ```
+## there are 3 pages in this project now.
+### login page
+we can register and login.
+### list page
+we can see the contact-list and phone your contact.
+### add page
+we can add your linkman names and phone them.
