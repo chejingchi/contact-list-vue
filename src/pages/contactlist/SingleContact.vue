@@ -17,9 +17,9 @@
     }
 
     .single-contact {
-        font-size: 200%;
+        font-size: 180%;
         .icon-lianxirenat {
-            font-size: 30px;
+            font-size: 26px;
         }
     }
 </style>
