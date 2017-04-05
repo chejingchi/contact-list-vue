@@ -14,7 +14,7 @@
                 </div>
                 <mt-radio
                         title="性别"
-                        :value.sync="sex"
+                        v-model.trim="sex"
                         :options="options">
                 </mt-radio>
                 <div class="manipulate-area">

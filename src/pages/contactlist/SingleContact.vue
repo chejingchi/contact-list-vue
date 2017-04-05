@@ -1,10 +1,10 @@
 <template>
     <div class="single-contact">
         <mt-cell-swipe title="" :right="[{
-            content: 'Delete',
-            style: { background: 'red', color: '#fff', },
-            handler: () => this.deleteContact()
-            }]">
+                content: 'Delete',
+                style: { background: 'red', color: '#fff', },
+                handler: () => this.deleteContact()
+                }]">
             <div class="contact-name" @click="contact.active = !contact.active">
                 <i class="iconfont icon-lianxirenat"></i>
                 <span> {{contact.contactName}}</span>
@@ -64,11 +64,16 @@
     methods: {
       deleteContact () {
         let param = {}
-        axios.post(HTTP_ROOT + 'deleteLinkMan', param, JSON_HEADER_OBJ).then((resp) => {
-          this.$router.push('/contact-list/')
-        }).catch((resp) => {
-          console.log(resp)
-        })
+        param.id = this.contact.id
+        axios.post(HTTP_ROOT + '/contactList/deleteLinkMan', param, JSON_HEADER_OBJ)
+            .then((resp) => {
+              if (resp && resp.data.flag) {
+                this.$emit('deleteSingleContact', this.contact.id)
+              }
+            })
+            .catch((resp) => {
+              console.log(resp)
+            })
       }
     }
   }

@@ -7,7 +7,8 @@
         </div>
         <div>
             <div class="list-area" v-for="contact in contactList">
-                <SingleContact :contact="contact"></SingleContact>
+                <SingleContact :contact="contact" :userId="user.id"
+                               @deleteSingleContact="deleteSingleContact"></SingleContact>
             </div>
         </div>
     </div>
@@ -20,7 +21,7 @@
             margin-top: 5%;
             font-size: 200%;
             .icon-icon {
-                font-size: 20px;
+                font-size: 26px;
             }
             .icon-tianjia {
                 margin-right: 6%;
@@ -65,6 +66,18 @@
     methods: {
       addLinkMan () {
         this.$router.push('/add-linkman/' + this.user.id)
+      },
+      deleteSingleContact (id) {
+        alert(id)
+        for (let contact of this.contactList) {
+          alert(id)
+          if (id && id === contact.id) {
+            alert(id)
+            alert(contact)
+            this.contactList.pop(contact)
+            alert(id)
+          }
+        }
       }
     },
     components: {
