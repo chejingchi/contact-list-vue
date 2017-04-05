@@ -30,10 +30,7 @@
         div {
             .list-area {
                 padding-top: 5%;
-                padding-bottom: 5%;
                 margin-left: 5%;
-                border-bottom: 1px solid OldLace;
-
             }
         }
     }

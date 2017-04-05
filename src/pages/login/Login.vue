@@ -37,7 +37,18 @@
     },
     methods: {
       register () {
-        console.log()
+        axios.post(HTTP_ROOT + '/contactList/register', {
+          username: this.username,
+          password: this.password
+        }, JSON_HEADER_OBJ).then((rsp) => {
+          let user = rsp.data.user
+          console.log(user)
+          if (user && (user.username = this.username)) {
+            this.$router.push('/login')
+          }
+        }).catch(function (response) {
+          console.log(response)
+        })
       },
       login () {
         axios.post(HTTP_ROOT + '/contactList/login', {

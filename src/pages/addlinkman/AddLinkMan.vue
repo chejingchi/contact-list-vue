@@ -12,6 +12,11 @@
                         <input type="text" placeholder="" placeholder="telephone..." v-model.trim="phoneNum"/>
                     </p>
                 </div>
+                <mt-radio
+                        title="性别"
+                        :value.sync="sex"
+                        :options="options">
+                </mt-radio>
                 <div class="manipulate-area">
                     <p class="contact-submit">
                         <input class="register" type="button" value="添加" @click="addLinkMan">
@@ -54,7 +59,18 @@
       return {
         linkManName: '',
         phoneNum: '',
-        user: {}
+        sex: '',
+        user: {},
+        options: [
+          {
+            label: '男',
+            value: '1'
+          },
+          {
+            label: '女',
+            value: '0'
+          }
+        ]
       }
     },
     methods: {
@@ -63,6 +79,7 @@
         param.userId = this.user.id
         param.contactName = this.linkManName
         param.phoneNum = this.phoneNum
+        param.sex = this.sex
         axios.post(HTTP_ROOT + '/contactList/addLinkMan', param, {headers: JSON_HEADER})
             .then((rsp) => {
               if (rsp.data.flag) {
