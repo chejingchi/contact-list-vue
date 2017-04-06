@@ -25,7 +25,7 @@
 <script>
   import axios from 'axios'
   import {HTTP_ROOT, JSON_HEADER_OBJ} from '@/config'
-  import {Toast} from 'mint-ui'
+  import util from '../../utils'
 
   export default {
     name: 'login',
@@ -38,7 +38,11 @@
     },
     methods: {
       register () {
-        if (this.checkIsEmpty()) {
+        let flag = util.checkIsEmpty({value: this.username, message: '请输入用户名'}, {
+          value: this.password,
+          message: '请输入密码'
+        })
+        if (flag) {
           axios.post(HTTP_ROOT + '/contactList/register', {
             username: this.username,
             password: this.password
@@ -46,7 +50,7 @@
             let user = rsp.data.user
             console.log(user)
             if (user && (user.username = this.username)) {
-              this.$router.push('/login')
+              this.resetInfo()
             }
           }).catch(function (response) {
             console.log(response)
@@ -54,35 +58,24 @@
         }
       },
       login () {
-        axios.post(HTTP_ROOT + '/contactList/login', {
-          username: this.username,
-          password: this.password
-        }, JSON_HEADER_OBJ).then((rsp) => {
-          let user = rsp.data.user
-          console.log(user)
-          if (user && (user.username = this.username)) {
-            this.$router.push('/contact-list/' + user.id)
-          }
-        }).catch(function (response) {
-          console.log(response)
-        })
-      },
-      checkIsEmpty () {
-        if (this.username.length === 0) {
-          Toast({
-            message: '请输入用户名',
-            position: 'center',
-            duration: 2000
+        if (util.checkIsEmpty()) {
+          axios.post(HTTP_ROOT + '/contactList/login', {
+            username: this.username,
+            password: this.password
+          }, JSON_HEADER_OBJ).then((rsp) => {
+            let user = rsp.data.user
+            console.log(user)
+            if (user && (user.username = this.username)) {
+              this.$router.push('/contact-list/' + user.id)
+            }
+          }).catch(function (response) {
+            console.log(response)
           })
-          return false
-        } else if (this.password.length === 0) {
-          Toast({
-            message: '请输入用密码',
-            position: 'center',
-            duration: 2000
-          })
-          return false
         }
+      },
+      resetInfo () {
+        this.username = ''
+        this.password = ''
       }
     }
   }
