@@ -25,6 +25,7 @@
 <script>
   import axios from 'axios'
   import {HTTP_ROOT, JSON_HEADER_OBJ} from '@/config'
+  import {Toast} from 'mint-ui'
 
   export default {
     name: 'login',
@@ -37,18 +38,20 @@
     },
     methods: {
       register () {
-        axios.post(HTTP_ROOT + '/contactList/register', {
-          username: this.username,
-          password: this.password
-        }, JSON_HEADER_OBJ).then((rsp) => {
-          let user = rsp.data.user
-          console.log(user)
-          if (user && (user.username = this.username)) {
-            this.$router.push('/login')
-          }
-        }).catch(function (response) {
-          console.log(response)
-        })
+        if (this.checkIsEmpty()) {
+          axios.post(HTTP_ROOT + '/contactList/register', {
+            username: this.username,
+            password: this.password
+          }, JSON_HEADER_OBJ).then((rsp) => {
+            let user = rsp.data.user
+            console.log(user)
+            if (user && (user.username = this.username)) {
+              this.$router.push('/login')
+            }
+          }).catch(function (response) {
+            console.log(response)
+          })
+        }
       },
       login () {
         axios.post(HTTP_ROOT + '/contactList/login', {
@@ -63,6 +66,23 @@
         }).catch(function (response) {
           console.log(response)
         })
+      },
+      checkIsEmpty () {
+        if (this.username.length === 0) {
+          Toast({
+            message: '请输入用户名',
+            position: 'center',
+            duration: 2000
+          })
+          return false
+        } else if (this.password.length === 0) {
+          Toast({
+            message: '请输入用密码',
+            position: 'center',
+            duration: 2000
+          })
+          return false
+        }
       }
     }
   }
