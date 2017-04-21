@@ -58,7 +58,11 @@
         }
       },
       login () {
-        if (util.checkIsEmpty()) {
+        let flag = util.checkIsEmpty({value: this.username, message: '请输入用户名'}, {
+          value: this.password,
+          message: '请输入密码'
+        })
+        if (flag) {
           axios.post(HTTP_ROOT + '/contactList/login', {
             username: this.username,
             password: this.password

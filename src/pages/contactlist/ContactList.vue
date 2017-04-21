@@ -68,14 +68,9 @@
         this.$router.push('/add-linkman/' + this.user.id)
       },
       deleteSingleContact (id) {
-        alert(id)
         for (let contact of this.contactList) {
-          alert(id)
           if (id && id === contact.id) {
-            alert(id)
-            alert(contact)
             this.contactList.pop(contact)
-            alert(id)
           }
         }
       }
