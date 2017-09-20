@@ -1,4 +1,4 @@
-export const HTTP_ROOT = '/gym'
+export const HTTP_ROOT = '/contact-list-admin'
 export const HTTP_TIMEOUT = 20000
 
 export const JSON_HEADER_OBJ = {
